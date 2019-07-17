@@ -14,8 +14,9 @@ clientinfo_table_create = ("""CREATE TABLE IF NOT EXISTS clientinfo(
                             birthdate date,
                             gender varchar,
                             ethnicity varchar,
-                            recorded_date timestamp,
-                            PRIMARY KEY(clientid))""")
+                            recorded_date timestamp, 
+                            PRIMARY KEY (clientid))
+                            """)
 
 # CREATE DIMENSION TABLES
 clientbackground_table_create = ("""CREATE TABLE IF NOT EXISTS clientbackground(
@@ -29,8 +30,9 @@ clientbackground_table_create = ("""CREATE TABLE IF NOT EXISTS clientbackground(
                         pet varchar,
                         religion varchar,
                         spa_preference varchar,
-                        city_preference varchar,
-                        PRIMARY KEY(clientid))""")
+                        city_preference varchar, 
+                        PRIMARY KEY (clientid))
+                        """)
 
 clientpreference_table_create = ("""CREATE TABLE IF NOT EXISTS clientpreference(
                         clientid varchar not null,
@@ -42,12 +44,13 @@ clientpreference_table_create = ("""CREATE TABLE IF NOT EXISTS clientpreference(
                         smoker varchar,
                         drug_user varchar,
                         drinker varchar,
-                        ethnicity varchar""")
+                        ethnicity varchar)
+                        """)
 
 # INSERT RECORDS
 
-clientinfo_table_insert = ("""INSERT INTO clientinfo(clientid, firstname, lastname, email, birthdate, gender, ethnicity, recorded_date)
-                              VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
+clientinfo_table_insert = ("""INSERT INTO clientinfo(clientid, firstname, lastname, email, birthdate, gender, ethnicity)
+                              VALUES(%s, %s, %s, %s, %s, %s, %s)
                               ON CONFLICT(clientid)
                               DO NOTHING""")
 

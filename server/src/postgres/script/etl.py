@@ -3,23 +3,17 @@ import glob
 import psycopg2 as pg2
 import pandas as pd
 from sql_queries import *
-import datetime
 
-def process_clientinfo(filepath):
+
+def process_clientinfo(cur, conn):
     """Inserts records into the database from the tsv"""
-    df = pd.read_csv('clientinfo.txt', sep='\t', dtype = object)
-    df.columns = ['clientid', 'firstname', 'lastname', 'email', 'birthdate', 'gender', 'ethnicity']
-    for value in range(df.values):
-        print(df.values[0])
-    return
+    clientinfo_df = pd.read_csv(f'shared-housing\\server\\src\\postgres\\tsv files\\CLIENTINFO.txt', sep='\t', dtype = object)
+    clientinfo_data = clientinfo_df[clientinfo_df.columns]
+    for i, row in clientinfo_data.iterrows():
+        cur.execute(clientinfo_table_insert, row)
+        conn.commit()
 
-    try:
-        cur.execute(clientinfo_table_insert, clientinfo)
-    except:
-        print('Error inserting data for clientinfo.')
-        pass
-
-def porcess_clientbackground():
+"""def porcess_clientbackground():
     try:
         cur.execute(clientbackground_table_insert, clientbackground)
     except:
@@ -34,18 +28,21 @@ def process_clientpreference():
         print('Error inserting data for clientinfo.')
         pass
 
+"""
 def main():
-    #conn = psycopg2.connect("host=127.0.0.1 dbname=hackforla user=postgres password=password") #connect to the hackforla database
-    #cur = conn.cursor() 
+    #connect to the hackforla database
+    conn = pg2.connect() 
+    cur = conn.cursor() 
 
-    filepath = 'test'#'c:\user\ladbscid64\Project\postgres'
-    process_clientinfo(filepath)
-    #process_clientbackground(cur, filepath)
-    #process_clientpreference(cur, filepath)
-
+    process_clientinfo(cur, conn)
     #connection closed
-    #conn.close()
+    conn.close()
 
+
+"""process_clientbackground(cur)
+    process_clientpreference(cur)
+"""
+    
 
 if __name__ == "__main__":
     main()

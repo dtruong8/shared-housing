@@ -4,7 +4,7 @@ from sql_queries import create_table_queries, drop_table_queries
 
 def create_database():
     # connect to default database
-    conn = psycopg2.connect(database = 'postgres', user = 'postgres', password = 'poop1234')
+    conn = psycopg2.connect(database = '', user = '', password = '')
     conn.set_session(autocommit=True)
     cur = conn.cursor()
     
@@ -16,7 +16,7 @@ def create_database():
     conn.close()    
     
     # connect to hackforla database
-    conn = pg2.connect(database = 'hackforla', user = 'postgres', password = 'poop1234')
+    conn = pg2.connect(database = 'hackforla', user = '', password = '')
     cur = conn.cursor()    
     return cur, conn
 

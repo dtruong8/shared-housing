@@ -7,9 +7,9 @@ from sql_queries import *
 
 def process_clientinfo(cur, conn):
     """Inserts records into the database from the tsv"""
-    clientinfo_df = pd.read_csv(f'shared-housing\\server\\src\\postgres\\tsv files\\CLIENTINFO.txt', sep='\t', dtype = object)
-    clientinfo_data = clientinfo_df[clientinfo_df.columns]
-    for i, row in clientinfo_data.iterrows():
+    clientinfo_df = pd.read_csv(f'C:\\Users\\alber\\Desktop\\myWork\\projects\\shared_house\\shared-housing\\server\\src\\postgres\\tsv files\\CLIENTINFO.txt', sep='\t', dtype = object)
+    clientinfo_df['birthdate'] = clientinfo_df['birthdate'].fillna('01/01/0001')
+    for i, row in clientinfo_df.iterrows():
         cur.execute(clientinfo_table_insert, row)
         conn.commit()
 

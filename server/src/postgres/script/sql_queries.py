@@ -49,8 +49,8 @@ clientpreference_table_create = ("""CREATE TABLE IF NOT EXISTS clientpreference(
 
 # INSERT RECORDS
 
-clientinfo_table_insert = ("""INSERT INTO clientinfo(clientid, firstname, lastname, email, birthdate, gender, ethnicity)
-                              VALUES(%s, %s, %s, %s, %s, %s, %s)
+clientinfo_table_insert = ("""INSERT INTO clientinfo(clientid, firstname, lastname, email, birthdate, gender, ethnicity, recorded_date)
+                              VALUES(%s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
                               ON CONFLICT(clientid)
                               DO NOTHING""")
 

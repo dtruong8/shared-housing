@@ -44,7 +44,8 @@ clientpreference_table_create = ("""CREATE TABLE IF NOT EXISTS clientpreference(
                         smoker varchar,
                         drug_user varchar,
                         drinker varchar,
-                        ethnicity varchar)
+                        ethnicity varchar, 
+                        PRIMARY KEY (clientid))
                         """)
 
 # INSERT RECORDS
@@ -59,8 +60,8 @@ clientbackground_table_insert = ("""INSERT INTO clientbackground(clientid, relat
                                     ON CONFLICT (clientid) 
                                     DO NOTHING""")
 
-clientpreference_table_insert = ("""INSERT INTO clientpreference(clientid, gender, min_age, year, max_age, religion, pet, smoker, drug_user, drinker, ethnicity)
-                                    VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+clientpreference_table_insert = ("""INSERT INTO clientpreference(clientid, gender, min_age, max_age, religion, pet, smoker, drug_user, drinker, ethnicity)
+                                    VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                                     ON CONFLICT (clientid) 
                                     DO NOTHING""")
 
